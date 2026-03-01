@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../desafio-tecnico-compra-programada.md" />
+    <File Path="../diagrama-er-compra-programada.drawio" />
+    <File Path="../diagrama-negocios-compra-programada.drawio" />
+    <File Path="../diagrama-sequencia-compra-programada.drawio" />
+    <File Path="../exemplos-contratos-api.md" />
+    <File Path="../glossario-compra-programada.md" />
+    <File Path="../layout-cotahist-b3.md" />
+    <File Path="../regras-negocio-detalhadas.md" />
+  </Folder>
+  <Project Path="API/API.csproj" />
+  <Project Path="Application/Application.csproj" />
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="Infrastructure/Infrastructure.csproj" />
+  <Project Path="Tests/Tests.csproj" />
+</Solution>
