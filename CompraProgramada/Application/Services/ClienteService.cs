@@ -33,6 +33,12 @@ public class ClienteService : IClienteService
 
     public async Task<Result<AdesaoResponse>> AderirAsync(AdesaoRequest request)
     {
+        // Validação: Formato do CPF
+        if (!ValidarCpf(request.CPF))
+        {
+            return Error.Validation("CPF invalido. Deve conter 11 digitos numericos validos.", "CPF_INVALIDO");
+        }
+
         // Validação: CPF duplicado
         if (await _clienteRepository.ExistePorCpfAsync(request.CPF))
         {
@@ -291,5 +297,46 @@ public class ClienteService : IClienteService
             HistoricoAportes: aportes,
             EvolucaoCarteira: evolucao
         );
+    }
+
+    /// <summary>
+    /// Valida o CPF usando o algoritmo oficial da Receita Federal.
+    /// </summary>
+    private static bool ValidarCpf(string cpf)
+    {
+        if (string.IsNullOrWhiteSpace(cpf))
+            return false;
+
+        // Remove caracteres não numéricos
+        var numeros = new string(cpf.Where(char.IsDigit).ToArray());
+
+        // Deve ter exatamente 11 dígitos
+        if (numeros.Length != 11)
+            return false;
+
+        // Verifica se todos os dígitos são iguais (ex: 111.111.111-11)
+        if (numeros.Distinct().Count() == 1)
+            return false;
+
+        // Calcula primeiro dígito verificador
+        var soma = 0;
+        for (var i = 0; i < 9; i++)
+            soma += (numeros[i] - '0') * (10 - i);
+
+        var resto = soma % 11;
+        var digito1 = resto < 2 ? 0 : 11 - resto;
+
+        if (numeros[9] - '0' != digito1)
+            return false;
+
+        // Calcula segundo dígito verificador
+        soma = 0;
+        for (var i = 0; i < 10; i++)
+            soma += (numeros[i] - '0') * (11 - i);
+
+        resto = soma % 11;
+        var digito2 = resto < 2 ? 0 : 11 - resto;
+
+        return numeros[10] - '0' == digito2;
     }
 }

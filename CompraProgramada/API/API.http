@@ -63,3 +63,23 @@ GET {{API_HostAddress}}/api/admin/conta-master/custodia
 Accept: application/json
 
 ###
+
+### ==================== MOTOR DE COMPRA ====================
+
+### Executar Compra Programada (Manual para Testes)
+POST {{API_HostAddress}}/api/motor/executar-compra
+Content-Type: application/json
+
+{
+  "dataReferencia": "2026-03-05"
+}
+
+### Verificar Próxima Data de Compra
+GET {{API_HostAddress}}/api/motor/proxima-data
+Accept: application/json
+
+### Verificar se Data é Data de Compra
+GET {{API_HostAddress}}/api/motor/verificar-data?data=2026-03-05
+Accept: application/json
+
+###

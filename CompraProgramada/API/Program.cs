@@ -22,14 +22,27 @@ builder.Services.AddScoped<IContaGraficaRepository, ContaGraficaRepository>();
 builder.Services.AddScoped<ICustodiaRepository, CustodiaRepository>();
 builder.Services.AddScoped<IHistoricoAporteRepository, HistoricoAporteRepository>();
 builder.Services.AddScoped<ICestaRepository, CestaRepository>();
+builder.Services.AddScoped<IOrdemCompraRepository, OrdemCompraRepository>();
 
 // Register Services
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddSingleton(new CotacaoServiceOptions
+{
+    CotacoesPath = builder.Configuration["CotacoesPath"] ?? "cotacoes"
+});
 builder.Services.AddScoped<ICotacaoService, CotacaoService>();
 builder.Services.AddScoped<ICestaService, CestaService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<ICompraService, CompraService>();
 
 var app = builder.Build();
+
+// Seed database
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<CompraProgramadaDbContext>();
+    await DbContextSeeder.SeedContaMasterAsync(context);
+}
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
