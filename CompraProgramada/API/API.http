@@ -1,6 +1,34 @@
 @API_HostAddress = http://localhost:5257
 
-GET {{API_HostAddress}}/weatherforecast/
+### Aderir ao Produto
+POST {{API_HostAddress}}/api/clientes/adesao
+Content-Type: application/json
+
+{
+  "nome": "Joao da Silva",
+  "cpf": "12345678901",
+  "email": "joao.silva@email.com",
+  "valorMensal": 3000.00
+}
+
+### Sair do Produto
+POST {{API_HostAddress}}/api/clientes/1/saida
+Content-Type: application/json
+
+### Alterar Valor Mensal
+PUT {{API_HostAddress}}/api/clientes/1/valor-mensal
+Content-Type: application/json
+
+{
+  "novoValorMensal": 6000.00
+}
+
+### Consultar Carteira
+GET {{API_HostAddress}}/api/clientes/1/carteira
+Accept: application/json
+
+### Consultar Rentabilidade
+GET {{API_HostAddress}}/api/clientes/1/rentabilidade
 Accept: application/json
 
 ###
