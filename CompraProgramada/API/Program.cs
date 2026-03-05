@@ -21,10 +21,13 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IContaGraficaRepository, ContaGraficaRepository>();
 builder.Services.AddScoped<ICustodiaRepository, CustodiaRepository>();
 builder.Services.AddScoped<IHistoricoAporteRepository, HistoricoAporteRepository>();
+builder.Services.AddScoped<ICestaRepository, CestaRepository>();
 
 // Register Services
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<ICotacaoService, CotacaoService>();
+builder.Services.AddScoped<ICestaService, CestaService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 
 var app = builder.Build();
 

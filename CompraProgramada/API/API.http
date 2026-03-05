@@ -32,3 +32,34 @@ GET {{API_HostAddress}}/api/clientes/1/rentabilidade
 Accept: application/json
 
 ###
+
+### ==================== ADMIN ====================
+
+### Cadastrar Cesta Top Five
+POST {{API_HostAddress}}/api/admin/cesta
+Content-Type: application/json
+
+{
+  "nome": "Top Five - Marco 2026",
+  "itens": [
+    { "ticker": "PETR4", "percentual": 30.00 },
+    { "ticker": "VALE3", "percentual": 25.00 },
+    { "ticker": "ITUB4", "percentual": 20.00 },
+    { "ticker": "BBDC4", "percentual": 15.00 },
+    { "ticker": "WEGE3", "percentual": 10.00 }
+  ]
+}
+
+### Consultar Cesta Atual
+GET {{API_HostAddress}}/api/admin/cesta/atual
+Accept: application/json
+
+### Histórico de Cestas
+GET {{API_HostAddress}}/api/admin/cesta/historico
+Accept: application/json
+
+### Consultar Custódia Master
+GET {{API_HostAddress}}/api/admin/conta-master/custodia
+Accept: application/json
+
+###
